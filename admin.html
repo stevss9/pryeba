@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <title>ADMIN</title>
+</head>
+
+<body class="col-18 col-m-6 col-lg-12", style="text-align:center">   
+    <h1 style="text-align:center", class="p-3 mb-2 bg-primary text-white">ADMIN</h1>
+
+    <H2>TABLA DE DATOS TIENDA</H2>
+    <!--CONTROLADOR 2 - TABLA DE DATOS TIENDA-->
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <!--INGRESAMOS LAS VARIABLES QUE VAMOS A RECIBIR-->
+                <th scope="col">NOMBRE</th>
+                <th scope="col">TELEFONO</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">GERENTE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--USAMOS EL FOR PARA PODER ACCEDER A LA LISTA-->
+            {% for tarea1 in task_listt %}
+            <tr>
+                <!--MUESTRA EL NOMBRE INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea1.task_name}}</th>
+                <!--MUESTRA EL TELEFONO INGRESADO EN EL FORMULARIO-->
+                <th>{{tarea1.task_phone}}</th>
+                <!--MUESTRA LA ESTADO INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea1.task_status}}</th>
+                <!--MUESTRA LA ESTADO INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea1.task_manager}}</th>
+                <!--BOTON QUE NOS PERMITE ELIMINAR LOS DATOS DE UNA FILA-->
+                <th><button oneclick="limpiar()">limpiar</button></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <H2>TABLA DE DATOS CLIENTE</H2>
+    <!--CONTROLADOR 2 - TABLA DE DATOS CLIENTE-->
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <!--INGRESAMOS LAS VARIABLES QUE VAMOS A RECIBIR-->
+                <th scope="col">NOMBRE</th>
+                <th scope="col">TELEFONO</th>
+                <th scope="col">ESTADO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--USAMOS EL FOR PARA PODER ACCEDER A LA LISTA-->
+            {% for tarea in task_list %}
+            <tr>
+                <!--MUESTRA EL NOMBRE INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea.task_name}}</th>
+                <!--MUESTRA EL TELEFONO INGRESADO EN EL FORMULARIO-->
+                <th>{{tarea.task_phone}}</th>
+                <!--MUESTRA LA ESTADO INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea.task_status}}</th>
+                <!--BOTON QUE NOS PERMITE ELIMINAR LOS DATOS DE UNA FILA-->
+                <th><button oneclick="limpiar()">limpiar</button></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!--BOTON BORRAR TODOS LOS CAMPOS DE LA TABLA-->
+    <form action="{{url_for('delete')}}" method="post" class="card-body">
+        <button type="submit" class="btn btn-danger mb-2">BORRAR</button>
+    </form>
+</body>
+</html>

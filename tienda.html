@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <title>TIENDA</title>
+</head>
+
+<body class="col-18 col-m-6 col-lg-12", style="text-align:center">   
+    <h1 style="text-align:center", class="p-3 mb-2 bg-success text-white">TIENDA</h1>
+
+    <!-- CONTROLADOR 1 - INGRESO DE DATOS-->
+    <center>
+        <form method="post" action="{{url_for('send1')}}">
+            <div class="form-row">
+                <!--FORMULARIO DONDE SE VAN A INGRESAR LOS DATOS-->
+                <div class="form-group col-md-6">
+                    <label>NOMBRE</label>
+                    <input type="text" class="form-control" placeholder="NOMBRE" name="task_name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>TELEFONO</label>
+                    <input type="text" class="form-control" placeholder="TELEFONO" name="task_phone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>GERENTE</label>
+                    <input type="text" class="form-control" placeholder="GERENTE" name="task_manager">
+                </div>
+                
+              <!--LABEL DONDE DESPLEGAMOS UNA LISTA DE OPCIONES-->
+              <div class="form-group col-md-6">
+                <label>ESTADO</label>
+                <select class="form-control" name="task_status">
+                <option value="", class="p-2 bg-white text-white"></option>
+                <option value="NORMAL", class="p-2 bg-success text-white", style="text-align:center">NORMAL</option>
+                <option value="CASO", class="p-2 bg-warning text-white", style="text-align:center">CASO</option>
+                </select>
+              </div>
+            </div>
+            <!--BOTON PARA ENVIAR DATOS A LA TABLA-->
+            <button type="submit" class="btn btn-success">REGISTRAR</button>
+        </form>
+    </center>
+    
+    <!--CONTROLADOR 2 - TABLA DE DATOS-->
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <!--INGRESAMOS LAS VARIABLES QUE VAMOS A RECIBIR-->
+                <th scope="col">NOMBRE</th>
+                <th scope="col">TELEFONO</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">GERENTE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--USAMOS EL FOR PARA PODER ACCEDER A LA LISTA-->
+            {% for tarea in task_list %}
+            <tr>
+                <!--MUESTRA EL NOMBRE INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea.task_name}}</th>
+                <!--MUESTRA EL TELEFONO INGRESADO EN EL FORMULARIO-->
+                <th>{{tarea.task_phone}}</th>
+                <!--MUESTRA LA ESTADO INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea.task_status}}</th>
+                <!--MUESTRA LA ESTADO INGRESADA EN EL FORMULARIO-->
+                <th>{{tarea.task_manager}}</th>
+                <!--BOTON QUE NOS PERMITE ELIMINAR LOS DATOS DE UNA FILA-->
+                <th><button oneclick="limpiar()">limpiar</button></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!--BOTON BORRAR TODOS LOS CAMPOS DE LA TABLA-->
+    <form action="{{url_for('delete1')}}" method="post" class="card-body">
+        <button type="submit" class="btn btn-danger mb-2">BORRAR</button>
+    </form>
+</body>
+</html>
